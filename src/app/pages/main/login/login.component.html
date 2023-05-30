@@ -1,0 +1,25 @@
+<div nz-row class="center-div">
+  <div nz-col nzSpan="10">
+    <h1>登入</h1>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="請輸入使用者名稱!">
+        <nz-input-group nzPrefixIcon="user">
+          <input type="text" nz-input formControlName="userName" placeholder="使用者名稱" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="請輸入密碼!">
+        <nz-input-group nzPrefixIcon="lock">
+          <input type="password" nz-input formControlName="password" placeholder="密碼" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">登入</button>
+    新用戶
+    <a routerLink="/register">註冊!</a>
+    </form>
+  </div>
+</div>
+

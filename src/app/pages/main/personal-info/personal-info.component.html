@@ -1,0 +1,30 @@
+
+<div nz-row class="center-div">
+    <div nz-col nzSpan="10">
+      <h1>個人信息</h1>
+        <nz-card style="width: 500px;" nzTitle="基本資訊" [nzExtra]="extraTemplate">
+            <ul nz-list nzBordered nzSize="large">
+                <li nz-list-item nzNoFlex>
+                  <ul nz-list-item-actions>
+                    <nz-list-item-action>
+                        {{ data.username }}
+                    </nz-list-item-action>
+                  </ul>
+                    帳號
+                </li>
+                <li nz-list-item nzNoFlex>
+                  <ul nz-list-item-actions>
+                    <nz-list-item-action>
+                        {{ data.email }}
+                    </nz-list-item-action>
+                  </ul>
+                    Email
+                </li>
+              </ul>
+        </nz-card>
+        <ng-template #extraTemplate>
+            <a routerLink="/edit-info">修改密碼</a>
+        </ng-template>
+    </div>
+</div>
+

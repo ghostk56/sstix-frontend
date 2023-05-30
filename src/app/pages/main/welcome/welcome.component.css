@@ -1,0 +1,42 @@
+[nz-carousel-content] {
+    text-align: center;
+    background: #364d79;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  h3 {
+    color: #fff;
+    margin-bottom: 0;
+    user-select: none;
+  }
+  
+
+  .slider {
+    width: 50%;
+  }
+  .slider-container {
+    margin-bottom: 16px;
+  }
+  .grid-config {
+    font-size: 14px;
+    background: #0092ff;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+
+  .carousel-container {
+    height: 300px;
+    overflow: hidden; /* 隱藏溢出的內容 */
+  }
+
+  .carousel-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 填充剪裁適應容器 */
+  }
