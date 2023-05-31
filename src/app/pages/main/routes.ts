@@ -15,6 +15,13 @@ export const MAIN_ROUTES: Route[] = [
         ), 
       },
       {
+        path: 'events/:id',
+        loadComponent: () =>
+        import('./events/event/event.component').then(
+          (mod) => mod.EventComponent
+        ), 
+      },
+      {
         path: 'events',
         loadComponent: () =>
         import('./events/events.component').then(
