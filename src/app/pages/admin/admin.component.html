@@ -12,23 +12,13 @@
         </a>
       </div>
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+        <li nz-submenu nzOpen nzTitle="管理員操作" nzIcon="dashboard">
           <ul>
             <li nz-menu-item nzMatchRouter>
-              <a routerLink="/welcome">Welcome</a>
+              <a routerLink="/admin/admin-events">活動查詢</a>
             </li>
             <li nz-menu-item nzMatchRouter>
-              <a>Monitor</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Workplace</a>
-            </li>
-          </ul>
-        </li>
-        <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a>Basic Form</a>
+              <a routerLink="/admin/admin-orders">訂購紀錄查詢</a>
             </li>
           </ul>
         </li>

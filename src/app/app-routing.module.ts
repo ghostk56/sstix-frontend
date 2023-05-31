@@ -11,9 +11,9 @@ const routes: Routes = [
   },
   { 
     path: 'admin', 
-    loadComponent: () =>
-      import('./pages/admin/admin.component').then(
-        (mod) => mod.AdminComponent
+    loadChildren: () =>
+      import('./pages/admin/routes').then(
+        (mod) => mod.ADMIN_ROUTES
       ), 
   },
   { path: '**', redirectTo: '/welcome' },
