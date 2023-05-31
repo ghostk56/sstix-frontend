@@ -14,6 +14,9 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 export const SHARED_ZORRO_MODULES = [
   NzIconModule,
@@ -31,5 +34,8 @@ export const SHARED_ZORRO_MODULES = [
   NzBreadCrumbModule,
   NzDatePickerModule,
   NzCardModule,
-  NzImageModule
+  NzImageModule,
+  NzInputNumberModule,
+  NzTableModule,
+  NzDividerModule
 ];

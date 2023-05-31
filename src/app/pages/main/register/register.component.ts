@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { CommonModule, registerLocaleData } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { SHARED_ZORRO_MODULES } from '../../../common/modules/shared-zorro.module';
 
 @Component({

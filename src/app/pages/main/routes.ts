@@ -15,6 +15,13 @@ export const MAIN_ROUTES: Route[] = [
         ), 
       },
       {
+        path: 'events',
+        loadComponent: () =>
+        import('./events/events.component').then(
+          (mod) => mod.EventsComponent
+        ), 
+      },
+      {
         path: 'events/:id',
         loadComponent: () =>
         import('./events/event/event.component').then(
@@ -22,10 +29,10 @@ export const MAIN_ROUTES: Route[] = [
         ), 
       },
       {
-        path: 'events',
+        path: 'events/:id/order-form',
         loadComponent: () =>
-        import('./events/events.component').then(
-          (mod) => mod.EventsComponent
+        import('./events/event/order-form/order-form.component').then(
+          (mod) => mod.OrderFormComponent
         ), 
       },
       {
