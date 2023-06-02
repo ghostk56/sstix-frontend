@@ -10,8 +10,8 @@ import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    importProvidersFrom(HttpClientModule),
     importProvidersFrom(BrowserAnimationsModule),
+    importProvidersFrom(HttpClientModule),
     importProvidersFrom(AppRoutingModule),
   ],
 });

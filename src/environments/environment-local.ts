@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'http://127.0.0.1:8087/kafka',
+  apiUrl: 'http://127.0.0.1:8080',
 };
