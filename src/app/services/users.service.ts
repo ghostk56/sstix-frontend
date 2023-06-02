@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { REST_API_URL } from '../common/system-parameter';
 import { UsersLoginRequest } from '../models/users.-login-request';
@@ -20,6 +20,11 @@ export class UsersService {
   }
 
   Register(user: UsersRegisterRequest) {
-    return this.http.post<any>(url, user);
+    return this.http.post<RestfulResponse<any>>(url, user);
+  }
+
+  UserInfo(token : string) {
+      const headers = new HttpHeaders().set('Authorization', token);
+    return this.http.get<RestfulResponse<any>>(url, { headers });
   }
 }
