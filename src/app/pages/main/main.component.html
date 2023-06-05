@@ -4,10 +4,20 @@
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
       <li nz-menu-item><a routerLink="/welcome">首頁</a></li>
       <li nz-menu-item><a routerLink="/events">探索活動</a></li>
-      <li nz-menu-item><a routerLink="/personal-info"><span nz-icon nzType="user" nzTheme="outline"></span> 資訊</a></li>
-      <li nz-menu-item><a routerLink="/register">註冊</a></li>
-      <li nz-menu-item><a routerLink="/login">登入</a></li>
-      <li nz-menu-item><a routerLink="/admin">管理頁面</a></li>
+      <li nz-menu-item *ngIf="loginService.getLoggedStatus() | async">
+        <a routerLink="/personal-info"
+          ><span nz-icon nzType="user" nzTheme="outline"></span> 資訊</a
+        >
+      </li>
+      <li nz-menu-item *ngIf="!(loginService.getLoggedStatus() | async)">
+        <a routerLink="/register">註冊</a>
+      </li>
+      <li nz-menu-item *ngIf="!(loginService.getLoggedStatus() | async)">
+        <a routerLink="/login">登入</a>
+      </li>
+      <li nz-menu-item *ngIf="loginService.getAdminStatus() | async">
+        <a routerLink="/admin">管理頁面</a>
+      </li>
     </ul>
   </nz-header>
   <nz-content>

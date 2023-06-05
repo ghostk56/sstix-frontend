@@ -1,18 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { CommonModule} from '@angular/common';
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { SHARED_ZORRO_MODULES } from '../../../common/modules/shared-zorro.module';
 import { UsersRegisterRequest } from 'src/app/models/users-register-request';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   standalone: true,
   selector: 'app-register',
   imports: [CommonModule, ReactiveFormsModule, SHARED_ZORRO_MODULES],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
   validateForm!: UntypedFormGroup;
@@ -23,15 +30,21 @@ export class RegisterComponent implements OnInit {
       const password = this.validateForm.get('password')?.value;
       const email = this.validateForm.get('email')?.value;
       const phone = this.validateForm.get('phone')?.value;
-      let registerRrequest : UsersRegisterRequest = {
+      let registerRrequest: UsersRegisterRequest = {
         userName: userName,
         password: password,
         email: email,
-        phone: phone
-      }
+        phone: phone,
+      };
       this.usersService.register(registerRrequest).subscribe({
         next: (result) => {
-          localStorage.setItem('token', result.data);
+          localStorage.setItem('token', result.data.token);
+          this.loginService.loggedIn();
+          if (result.data.level == 2) {
+            this.loginService.loggedAdmin();
+          } else {
+            this.loginService.loggedOutAdmin();
+          }
           this.modalService.success({
             nzTitle: '註冊成功',
             nzContent: '跳轉頁面',
@@ -47,10 +60,10 @@ export class RegisterComponent implements OnInit {
             nzOnOk: () => {},
           });
         },
-        complete: () => {}
+        complete: () => {},
       });
     } else {
-      Object.values(this.validateForm.controls).forEach(control => {
+      Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
@@ -61,10 +74,14 @@ export class RegisterComponent implements OnInit {
 
   updateConfirmValidator(): void {
     /** wait for refresh value */
-    Promise.resolve().then(() => this.validateForm.controls['checkPassword'].updateValueAndValidity());
+    Promise.resolve().then(() =>
+      this.validateForm.controls['checkPassword'].updateValueAndValidity()
+    );
   }
 
-  confirmationValidator = (control: UntypedFormControl): { [s: string]: boolean } => {
+  confirmationValidator = (
+    control: UntypedFormControl
+  ): { [s: string]: boolean } => {
     if (!control.value) {
       return { required: true };
     } else if (control.value !== this.validateForm.controls['password'].value) {
@@ -73,7 +90,13 @@ export class RegisterComponent implements OnInit {
     return {};
   };
 
-  constructor(private fb: UntypedFormBuilder, private usersService: UsersService , private modalService: NzModalService, private router: Router) {}
+  constructor(
+    private fb: UntypedFormBuilder,
+    private usersService: UsersService,
+    private modalService: NzModalService,
+    private router: Router,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({

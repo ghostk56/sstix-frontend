@@ -11,6 +11,7 @@ import { Router, RouterModule } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import { UsersLoginRequest } from 'src/app/models/users-login-request';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   standalone: true,
@@ -38,12 +39,18 @@ export class LoginComponent {
       this.usersService.login(loginRequest).subscribe({
         next: (result) => {
           if (result.returnCode == '00000') {
-            localStorage.setItem('token', result.data);
+            localStorage.setItem('token', result.data.token);
+            this.loginService.loggedIn();
+            if (result.data.level == 2) {
+              this.loginService.loggedAdmin();
+            } else {
+              this.loginService.loggedOutAdmin();
+            }
             this.modalService.success({
               nzTitle: '登入成功',
               nzContent: '跳轉頁面',
               nzOnOk: () => {
-                this.router.navigate(['/welcome']);
+                this.router.navigate(['/personal-info']);
               },
             });
           }
@@ -74,7 +81,8 @@ export class LoginComponent {
     private fb: UntypedFormBuilder,
     private usersService: UsersService,
     private modalService: NzModalService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {

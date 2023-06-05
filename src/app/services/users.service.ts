@@ -6,6 +6,7 @@ import { UsersRegisterRequest } from '../models/users-register-request';
 import { RestfulResponse } from '../common/core/RestfulResponse';
 import { UsersInfoResponse } from '../models/users-info-response';
 import { UsersUpdateRequest } from '../models/users-update-request';
+import { UsersLoginResponse } from '../models/users-login-response';
 
 const url = REST_API_URL + '/users';
 @Injectable({
@@ -15,11 +16,23 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   login(user: UsersLoginRequest) {
-    return this.http.post<RestfulResponse<any>>(url + '/login', user);
+    return this.http.post<RestfulResponse<UsersLoginResponse>>(
+      url + '/login',
+      user
+    );
   }
 
   register(user: UsersRegisterRequest) {
-    return this.http.post<RestfulResponse<any>>(url, user);
+    return this.http.post<RestfulResponse<UsersLoginResponse>>(url, user);
+  }
+
+  validated(token: string) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer${token}`);
+    return this.http.post<RestfulResponse<UsersLoginResponse>>(
+      url + '/validate',
+      null,
+      { headers }
+    );
   }
 
   userInfo(token: string) {
@@ -27,7 +40,7 @@ export class UsersService {
     return this.http.get<RestfulResponse<UsersInfoResponse>>(url, { headers });
   }
 
-  eidtInfo(token: string, user : UsersUpdateRequest) {
+  eidtInfo(token: string, user: UsersUpdateRequest) {
     const headers = new HttpHeaders().set('Authorization', `Bearer${token}`);
     return this.http.put<RestfulResponse<any>>(url, user, { headers });
   }
