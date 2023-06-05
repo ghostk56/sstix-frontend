@@ -91,6 +91,7 @@
           <nz-upload
             nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
             [nzHeaders]="{ authorization: 'authorization-text' }"
+            nzAccept="jpg"
             (nzChange)="handleChange($event)"
           >
             <button nz-button>

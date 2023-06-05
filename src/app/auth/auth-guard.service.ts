@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.loginService.getLoggedStatus()) {
+    if (this.loginService.logged$.value) {
       return true;
     } else {
       // 使用者未登入，導向登入頁面

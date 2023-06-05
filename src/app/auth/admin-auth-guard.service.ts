@@ -19,7 +19,7 @@ export class AdminAuthGuard implements CanActivate, CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.loginService.getAdminStatus()) {
+    if (this.loginService.admin$.value) {
       return true;
     } else {
       // 使用者沒有權限，導向登入頁面
