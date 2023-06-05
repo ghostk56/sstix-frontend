@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,25 @@ export class LoginService {
     return this.logged$.asObservable();
   }
 
-  autoLogin() {}
+  autoLogin() {
+    let token = localStorage.getItem('token');
+    if (token) {
+      this.usersService.validated(token).subscribe({
+        next: (result) => {
+          if (result.returnCode == '00000') {
+            this.loggedIn();
+            if (result.data.level == 2) {
+              this.loggedAdmin();
+            }
+          }
+        },
+        error: () => {
+          this.loggedOut();
+        },
+        complete: () => {},
+      });
+    }
+  }
 
-  constructor() {}
+  constructor(private usersService: UsersService) {}
 }
