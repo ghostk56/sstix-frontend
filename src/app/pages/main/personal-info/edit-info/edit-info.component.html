@@ -1,43 +1,60 @@
 <div nz-row class="center-div">
-    <div nz-col nzSpan="10">
-      <h1>修改密碼</h1>
-      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-        <nz-form-item>
-          <nz-form-label [nzLg]="6" [nzMd]="24" nzRequired nzFor="oldpassword">原密碼</nz-form-label>
-          <nz-form-control [nzLg]="12" [nzMd]="24" nzErrorTip="請輸入原密碼!">
-          <input nz-input type="password" formControlName="oldpassword" id="oldpassword" />
-          </nz-form-control>
+  <div nz-col nzSpan="10">
+    <h1>修改密碼</h1>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-label [nzLg]="6" [nzMd]="24" nzRequired nzFor="oldPassword"
+          >原密碼</nz-form-label
+        >
+        <nz-form-control [nzLg]="12" [nzMd]="24" nzErrorTip="請輸入原密碼!">
+          <input
+            nz-input
+            type="password"
+            formControlName="oldPassword"
+            id="oldPassword"
+          />
+        </nz-form-control>
       </nz-form-item>
-        <nz-form-item>
-          <nz-form-label [nzLg]="6" [nzMd]="24" nzFor="password" nzRequired>新密碼</nz-form-label>
-          <nz-form-control [nzLg]="12" [nzMd]="24" nzErrorTip="請輸入新密碼!">
-            <input
-              nz-input
-              type="password"
-              id="password"
-              formControlName="password"
-              (ngModelChange)="updateConfirmValidator()"
-            />
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-form-label [nzLg]="6" [nzMd]="24" nzFor="checkPassword" nzRequired>確認新密碼</nz-form-label>
-          <nz-form-control [nzLg]="12" [nzMd]="24" [nzErrorTip]="errorTpl">
-            <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
-            <ng-template #errorTpl let-control>
-              <ng-container *ngIf="control.hasError('required')">請確認新密碼！</ng-container>
-              <ng-container *ngIf="control.hasError('confirm')">
-                兩次輸入的密碼不一致！
-              </ng-container>
-            </ng-template>
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item nz-row class="register-area">
-          <nz-form-control [nzSpan]="14" [nzOffset]="4">
-            <button nz-button nzType="primary">提交</button>
-          </nz-form-control>
-        </nz-form-item>
-      </form>
-    </div>
+      <nz-form-item>
+        <nz-form-label [nzLg]="6" [nzMd]="24" nzFor="password" nzRequired
+          >新密碼</nz-form-label
+        >
+        <nz-form-control [nzLg]="12" [nzMd]="24" nzErrorTip="請輸入新密碼!">
+          <input
+            nz-input
+            type="password"
+            id="password"
+            formControlName="password"
+            (ngModelChange)="updateConfirmValidator()"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzLg]="6" [nzMd]="24" nzFor="checkPassword" nzRequired
+          >確認新密碼</nz-form-label
+        >
+        <nz-form-control [nzLg]="12" [nzMd]="24" [nzErrorTip]="errorTpl">
+          <input
+            nz-input
+            type="password"
+            formControlName="checkPassword"
+            id="checkPassword"
+          />
+          <ng-template #errorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')"
+              >請確認新密碼！</ng-container
+            >
+            <ng-container *ngIf="control.hasError('confirm')">
+              兩次輸入的密碼不一致！
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="4">
+          <button nz-button nzType="primary">提交</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
   </div>
-  
+</div>

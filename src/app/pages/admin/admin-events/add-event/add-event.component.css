@@ -7,3 +7,8 @@ nz-range-picker {
   display: flex;
   justify-content: center;
 }
+
+.list-container {
+  height: 100%;
+  overflow: auto;
+}

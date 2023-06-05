@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { CommonModule} from '@angular/common';
 import { SHARED_ZORRO_MODULES } from '../../../common/modules/shared-zorro.module';
-import { UsersRegisterRequest } from 'src/app/models/users.-register-request';
+import { UsersRegisterRequest } from 'src/app/models/users-register-request';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
         email: email,
         phone: phone
       }
-      this.usersService.Register(registerRrequest).subscribe({
+      this.usersService.register(registerRrequest).subscribe({
         next: (result) => {
           localStorage.setItem('token', result.data);
           this.modalService.success({
