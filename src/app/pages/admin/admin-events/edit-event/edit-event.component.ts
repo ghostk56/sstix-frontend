@@ -9,10 +9,11 @@ import { CommonModule } from '@angular/common';
 import { SHARED_ZORRO_MODULES } from 'src/app/common/modules/shared-zorro.module';
 import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
-import { EventAddRequest } from 'src/app/models/event-add-request';
 import { EventsService } from 'src/app/services/events.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { EventsResponse } from 'src/app/models/events-response';
+import { EventUpdateRequest } from 'src/app/models/event-update-request';
 
 @Component({
   selector: 'app-edit-event',
@@ -30,15 +31,14 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 export class EditEventComponent {
   validateForm!: UntypedFormGroup;
   image = '';
+  data!: EventsResponse;
+  dataLoaded = false;
+  eventId!: string;
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      if (this.image == '') {
-        this.msg.error('請選擇圖片');
-        return;
-      }
-      console.log('submit', this.validateForm.value);
-      let req: EventAddRequest = {
+      let req: EventUpdateRequest = {
+        id: this.eventId,
         name: this.validateForm.get('name')?.value,
         details: this.validateForm.get('details')?.value,
         location: this.validateForm.get('location')?.value,
@@ -51,7 +51,7 @@ export class EditEventComponent {
       };
       let token = localStorage.getItem('token');
       if (token) {
-        this.eventsService.addEvent(token, req).subscribe({
+        this.eventsService.editEvent(token, req).subscribe({
           next: (result) => {
             if (result.returnCode == '00000') {
               this.modalService.success({
@@ -99,7 +99,8 @@ export class EditEventComponent {
     private msg: NzMessageService,
     private eventsService: EventsService,
     private modalService: NzModalService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -113,5 +114,30 @@ export class EditEventComponent {
       qty: [null, [Validators.required]],
       status: [null, [Validators.required]],
     });
+
+    this.route.params.subscribe((params) => {
+      this.eventId = params['id'];
+    });
+    let token = localStorage.getItem('token');
+    if (token && this.eventId) {
+      this.eventsService.selectIdEvent(token, this.eventId).subscribe({
+        next: (result) => {
+          if (result.returnCode == '00000' && result.data != null) {
+            this.data = result.data;
+            this.dataLoaded = true;
+          }
+        },
+        error: (result) => {
+          if (result.status == 403) {
+            this.modalService.success({
+              nzTitle: result.error.returnMsg,
+              nzContent: '錯誤!',
+              nzOnOk: () => {},
+            });
+          }
+        },
+        complete: () => {},
+      });
+    }
   }
 }

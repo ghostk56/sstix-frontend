@@ -97,7 +97,11 @@
             >狀態</nz-form-label
           >
           <nz-form-control [nzLg]="12" [nzMd]="24" nzErrorTip="請輸入狀態!">
-            <nz-radio-group formControlName="status" id="status">
+            <nz-radio-group
+              [ngModel]="'0'"
+              formControlName="status"
+              id="status"
+            >
               <label nz-radio nzValue="1">啟用</label>
               <label nz-radio nzValue="0">停止</label>
             </nz-radio-group>

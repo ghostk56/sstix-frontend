@@ -17,8 +17,20 @@ export class EventsService {
     return this.http.get<RestfulResponse<EventsResponse[]>>(url, { headers });
   }
 
+  selectIdEvent(token: string, id: string) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<RestfulResponse<EventsResponse>>(url + '/' + id, {
+      headers,
+    });
+  }
+
   addEvent(token: string, event: EventAddRequest) {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<RestfulResponse<any>>(url, event, { headers });
+  }
+
+  editEvent(token: string, event: EventAddRequest) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<RestfulResponse<any>>(url, event, { headers });
   }
 }

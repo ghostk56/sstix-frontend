@@ -37,7 +37,6 @@ export class AddEventComponent {
         this.msg.error('請選擇圖片');
         return;
       }
-      console.log('submit', this.validateForm.value);
       let req: EventAddRequest = {
         name: this.validateForm.get('name')?.value,
         details: this.validateForm.get('details')?.value,
