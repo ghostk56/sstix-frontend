@@ -1,8 +1,24 @@
 <div class="list-container">
   <div nz-row class="center-div">
-    <div nz-col nzSpan="18">
+    <div nz-col nzSpan="14">
       <h1>新增活動</h1>
-      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-upload
+        nzName="image"
+        nzAction="http://localhost:8080/image"
+        nzFileType="image/jpeg"
+        (nzChange)="handleChange($event)"
+      >
+        <button nz-button>
+          <span nz-icon nzType="upload"></span>
+          上傳圖片
+        </button>
+      </nz-upload>
+      <form
+        nz-form
+        nzLayout="vertical"
+        [formGroup]="validateForm"
+        (ngSubmit)="submitForm()"
+      >
         <nz-form-item>
           <nz-form-label [nzLg]="6" [nzMd]="24" nzRequired nzFor="name"
             >活動名稱</nz-form-label
@@ -28,11 +44,11 @@
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-label [nzLg]="6" [nzMd]="24" nzRequired nzFor="event_date"
+          <nz-form-label [nzLg]="6" [nzMd]="24" nzRequired nzFor="eventDate"
             >活動日期</nz-form-label
           >
           <nz-form-control [nzLg]="12" [nzMd]="24" nzErrorTip="請輸入活動日期!">
-            <input nz-input formControlName="event_date" id="event_date" />
+            <input nz-input formControlName="eventDate" id="eventDate" />
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
@@ -82,33 +98,10 @@
           >
           <nz-form-control [nzLg]="12" [nzMd]="24" nzErrorTip="請輸入狀態!">
             <nz-radio-group formControlName="status" id="status">
-              <label nz-radio nzValue="0">啟用</label>
-              <label nz-radio nzValue="1">停止</label>
+              <label nz-radio nzValue="1">啟用</label>
+              <label nz-radio nzValue="0">停止</label>
             </nz-radio-group>
           </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-upload
-            nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            [nzHeaders]="{ authorization: 'authorization-text' }"
-            nzAccept="jpg"
-            (nzChange)="handleChange($event)"
-          >
-            <button nz-button>
-              <span nz-icon nzType="upload"></span>
-              上傳圖片
-            </button>
-          </nz-upload>
-          <nz-upload
-            nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            [nzHeaders]="{ authorization: 'authorization-text' }"
-            (nzChange)="handleChange($event)"
-          >
-            <button nz-button>
-              <span nz-icon nzType="upload"></span>
-              上傳圖片
-            </button>
-          </nz-upload>
         </nz-form-item>
         <nz-form-item nz-row class="register-area">
           <nz-form-control [nzSpan]="14" [nzOffset]="4">

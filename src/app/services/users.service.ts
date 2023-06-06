@@ -27,7 +27,7 @@ export class UsersService {
   }
 
   validated(token: string) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<RestfulResponse<UsersLoginResponse>>(
       url + '/validate',
       null,
@@ -36,12 +36,12 @@ export class UsersService {
   }
 
   userInfo(token: string) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<RestfulResponse<UsersInfoResponse>>(url, { headers });
   }
 
   eidtInfo(token: string, user: UsersUpdateRequest) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put<RestfulResponse<any>>(url, user, { headers });
   }
 }

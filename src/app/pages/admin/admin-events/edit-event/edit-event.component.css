@@ -1,0 +1,14 @@
+nz-date-picker,
+nz-range-picker {
+  margin: 0 8px 12px 0;
+}
+
+.center-div {
+  display: flex;
+  justify-content: center;
+}
+
+.list-container {
+  height: 100%;
+  overflow: auto;
+}

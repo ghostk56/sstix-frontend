@@ -75,7 +75,7 @@ export class PersonalInfoComponent implements OnInit {
               nzTitle: result.error.returnMsg,
               nzContent: '登入驗證錯誤!',
               nzOnOk: () => {
-                this.router.navigate(['/login']);
+                this.loggedOut();
               },
             });
           }
