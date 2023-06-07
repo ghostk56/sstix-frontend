@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   ReactiveFormsModule,
@@ -5,15 +6,14 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { SHARED_ZORRO_MODULES } from 'src/app/common/modules/shared-zorro.module';
-import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
-import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
-import { EventsService } from 'src/app/services/events.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { EventsResponse } from 'src/app/models/events-response';
+import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
+import { SHARED_ZORRO_MODULES } from 'src/app/common/modules/shared-zorro.module';
 import { EventUpdateRequest } from 'src/app/models/event-update-request';
+import { EventsResponse } from 'src/app/models/events-response';
+import { EventsService } from 'src/app/services/events.service';
 
 @Component({
   selector: 'app-edit-event',
@@ -118,9 +118,8 @@ export class EditEventComponent {
     this.route.params.subscribe((params) => {
       this.eventId = params['id'];
     });
-    let token = localStorage.getItem('token');
-    if (token && this.eventId) {
-      this.eventsService.selectIdEvent(token, this.eventId).subscribe({
+    if (this.eventId) {
+      this.eventsService.selectIdEvent(this.eventId).subscribe({
         next: (result) => {
           if (result.returnCode == '00000' && result.data != null) {
             this.data = result.data;

@@ -33,7 +33,15 @@
           <td>{{ data.location }}</td>
           <td>{{ data.organizer }}</td>
           <td>{{ data.eventDate }}</td>
-          <td>{{ data.status === 1 ? "啟用" : "停止" }}</td>
+          <td>
+            {{
+              data.status === 1
+                ? "販售中"
+                : data.status === 2
+                ? "尚未開賣"
+                : "下架"
+            }}
+          </td>
           <td>{{ data.price }}</td>
           <td>{{ data.qty }}</td>
           <td>

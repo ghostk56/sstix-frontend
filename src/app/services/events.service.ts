@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { REST_API_URL } from '../common/system-parameter';
 import { RestfulResponse } from '../common/core/RestfulResponse';
+import { REST_API_URL } from '../common/system-parameter';
 import { EventAddRequest } from '../models/event-add-request';
 import { EventsResponse } from '../models/events-response';
 
@@ -12,16 +12,15 @@ const url = REST_API_URL + '/events';
 export class EventsService {
   constructor(private http: HttpClient) {}
 
-  selectAllEvents(token: string) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<RestfulResponse<EventsResponse[]>>(url, { headers });
+  selectAllEvents(name: string = '', status: number = 0) {
+    const params = new HttpParams().set('name', name).set('status', status);
+    return this.http.get<RestfulResponse<EventsResponse[]>>(url, {
+      params,
+    });
   }
 
-  selectIdEvent(token: string, id: string) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<RestfulResponse<EventsResponse>>(url + '/' + id, {
-      headers,
-    });
+  selectIdEvent(id: string) {
+    return this.http.get<RestfulResponse<EventsResponse>>(url + '/' + id);
   }
 
   addEvent(token: string, event: EventAddRequest) {
