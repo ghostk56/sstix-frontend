@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { SHARED_ZORRO_MODULES } from 'src/app/common/modules/shared-zorro.module';
 import { EventsResponse } from 'src/app/models/events-response';
-import { NzModalService } from 'ng-zorro-antd/modal';
 import { EventsService } from 'src/app/services/events.service';
 
 @Component({
@@ -15,6 +16,7 @@ import { EventsService } from 'src/app/services/events.service';
     RouterModule,
     ReactiveFormsModule,
     SHARED_ZORRO_MODULES,
+    NzEmptyModule,
   ],
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.css'],
@@ -23,13 +25,16 @@ export class EventsComponent {
   eventsData: EventsResponse[] = [];
 
   constructor(
-    private router: Router,
     private eventsService: EventsService,
     private modalService: NzModalService
   ) {}
 
   ngOnInit(): void {
-    this.eventsService.selectAllEvents('', 1).subscribe({
+    this.selectEvents();
+  }
+
+  selectEvents(name: string = '') {
+    this.eventsService.selectAllEvents(name, 1).subscribe({
       next: (result) => {
         if (result.returnCode == '00000' && result.data != null) {
           this.eventsData = result.data;
@@ -46,5 +51,9 @@ export class EventsComponent {
       },
       complete: () => {},
     });
+  }
+
+  onEnterPressed(value: string) {
+    this.selectEvents(value);
   }
 }

@@ -115,9 +115,7 @@ export class EditEventComponent {
       status: [null, [Validators.required]],
     });
 
-    this.route.params.subscribe((params) => {
-      this.eventId = params['id'];
-    });
+    this.eventId = this.route.snapshot.paramMap.get('id')!;
     if (this.eventId) {
       this.eventsService.selectIdEvent(this.eventId).subscribe({
         next: (result) => {

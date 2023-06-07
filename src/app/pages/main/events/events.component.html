@@ -1,5 +1,11 @@
 <nz-input-group [nzSuffix]="suffixIconSearch">
-  <input type="text" nz-input placeholder="搜索活動" />
+  <input
+    type="text"
+    nz-input
+    placeholder="搜索活動"
+    (keydown.enter)="onEnterPressed(searchInput.value)"
+    #searchInput
+  />
 </nz-input-group>
 <ng-template #suffixIconSearch>
   <span nz-icon nzType="search"></span>
@@ -7,13 +13,18 @@
 <br />
 <br />
 <h1>活動</h1>
-<div nz-row [nzGutter]="[18, 18]">
+<ng-container *ngIf="eventsData.length === 0">
+  <nz-empty nzNotFoundContent="找不到相關內容!"></nz-empty>
+</ng-container>
+<div nz-row [nzGutter]="[10, 10]">
   <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let data of eventsData">
     <nz-card nzHoverable style="width: 400px" [nzCover]="coverTemplate">
       <nz-card-meta
         nzTitle="{{ data.name }}"
         nzDescription="{{ data.eventDate }}"
       ></nz-card-meta>
+      <br />
+      <p>{{ data.status === 1 ? "販售中" : "尚未開賣" }}</p>
     </nz-card>
     <ng-template #coverTemplate>
       <div class="image-container">
@@ -27,4 +38,3 @@
     </ng-template>
   </div>
 </div>
-<p>events works!</p>

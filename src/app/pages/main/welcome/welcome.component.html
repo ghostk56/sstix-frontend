@@ -1,23 +1,54 @@
-<nz-carousel nzAutoPlay>
-  <div class="carousel-container" nz-carousel-content *ngFor="let index of array">
-    <!-- <img nz-image nzSrc="https://blog.camel2243.com/wp-content/uploads/App-Chrome-icon.png" [nzFallback]="fallback" alt="" /> -->
-    <img alt="example" src="https://blog.camel2243.com/wp-content/uploads/App-Chrome-icon.png" />
-    <!-- <h3>{{ index }}</h3> -->
-  </div>
-</nz-carousel>
+<div class="carousel-content">
+  <nz-carousel nzEffect="scrollx" nzAutoPlay>
+    <div nz-carousel-content>
+      <img
+        alt="example"
+        src="http://localhost:8080/image/{{ eventsData[0].image1 }}"
+      />
+    </div>
+    <div nz-carousel-content>
+      <img
+        alt="example"
+        src="http://localhost:8080/image/{{ eventsData[1].image1 }}"
+      />
+    </div>
+    <div nz-carousel-content>
+      <img
+        alt="example"
+        src="http://localhost:8080/image/{{ eventsData[2].image1 }}"
+      />
+    </div>
+  </nz-carousel>
+</div>
 
-<br>
+<br />
 
 <h1>精選活動</h1>
-<div nz-row [nzGutter]="[24, 24]">
-  <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let i of array1">
-    <nz-card nzHoverable style="width:300px" [nzCover]="coverTemplate">
-      <nz-card-meta nzTitle="Europe Street beat" nzDescription="www.instagram.com"></nz-card-meta>
+<div nz-row [nzGutter]="[10, 10]">
+  <div
+    nz-col
+    class="gutter-row"
+    [nzSpan]="8"
+    *ngFor="let data of eventsData; let idx = index"
+    [hidden]="idx >= 3"
+  >
+    <nz-card nzHoverable style="width: 400px" [nzCover]="coverTemplate">
+      <nz-card-meta
+        nzTitle="{{ data.name }}"
+        nzDescription="{{ data.eventDate }}"
+      ></nz-card-meta>
+      <br />
+      <p>{{ data.status === 1 ? "販售中" : "尚未開賣" }}</p>
     </nz-card>
     <ng-template #coverTemplate>
-      <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+      <div class="image-container">
+        <a routerLink="/events/{{ data.id }}">
+          <img
+            alt="example"
+            src="http://localhost:8080/image/{{ data.image1 }}"
+          />
+        </a>
+      </div>
     </ng-template>
-    <!-- <div class="grid-config">Column</div> -->
   </div>
 </div>
-<p>welcome works!</p>
