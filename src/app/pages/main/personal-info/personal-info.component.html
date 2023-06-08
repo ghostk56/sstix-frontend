@@ -36,7 +36,12 @@
 </div>
 <div nz-row class="center-div">
   <div nz-col nzSpan="10">
-    <button nz-button nzSize="large" nzType="primary" (click)="test()">
+    <button
+      nz-button
+      nzSize="large"
+      nzType="primary"
+      (click)="toOrderHistory()"
+    >
       查詢訂票紀錄
     </button>
   </div>
@@ -49,30 +54,3 @@
     </button>
   </div>
 </div>
-<!-- <div nz-row class="center-div">
-  <div nz-col nzSpan="10">
-    <h1>訂購紀錄</h1>
-    <nz-table #basicTable [nzData]="listOfData">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Address</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of basicTable.data">
-          <td>{{ data.name }}</td>
-          <td>{{ data.age }}</td>
-          <td>{{ data.address }}</td>
-          <td>
-            <a>Action 一 {{ data.name }}</a>
-            <nz-divider nzType="vertical"></nz-divider>
-            <a>Delete</a>
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </div>
-</div> -->

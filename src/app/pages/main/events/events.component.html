@@ -16,9 +16,9 @@
 <ng-container *ngIf="eventsData.length === 0">
   <nz-empty nzNotFoundContent="找不到相關內容!"></nz-empty>
 </ng-container>
-<div nz-row [nzGutter]="[10, 10]">
+<div nz-row [nzGutter]="[20, 20]">
   <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let data of eventsData">
-    <nz-card nzHoverable style="width: 400px" [nzCover]="coverTemplate">
+    <nz-card nzHoverable style="width: 320px" [nzCover]="coverTemplate">
       <nz-card-meta
         nzTitle="{{ data.name }}"
         nzDescription="{{ data.eventDate }}"

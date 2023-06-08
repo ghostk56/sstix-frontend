@@ -24,7 +24,7 @@
 <br />
 
 <h1>精選活動</h1>
-<div nz-row [nzGutter]="[10, 10]">
+<div nz-row [nzGutter]="[20, 20]">
   <div
     nz-col
     class="gutter-row"
@@ -32,7 +32,7 @@
     *ngFor="let data of eventsData; let idx = index"
     [hidden]="idx >= 3"
   >
-    <nz-card nzHoverable style="width: 400px" [nzCover]="coverTemplate">
+    <nz-card nzHoverable style="width: 320px" [nzCover]="coverTemplate">
       <nz-card-meta
         nzTitle="{{ data.name }}"
         nzDescription="{{ data.eventDate }}"

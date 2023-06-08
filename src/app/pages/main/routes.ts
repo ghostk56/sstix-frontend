@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { MainComponent } from './main.component';
 import { AuthGuard } from 'src/app/auth/auth-guard.service';
+import { MainComponent } from './main.component';
 
 export const MAIN_ROUTES: Route[] = [
   {
@@ -62,6 +62,14 @@ export const MAIN_ROUTES: Route[] = [
         loadComponent: () =>
           import('./personal-info/edit-info/edit-info.component').then(
             (mod) => mod.EditInfoComponent
+          ),
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'order-history',
+        loadComponent: () =>
+          import('./personal-info/order-history/order-history.component').then(
+            (mod) => mod.OrderHistoryComponent
           ),
         canActivate: [AuthGuard],
       },

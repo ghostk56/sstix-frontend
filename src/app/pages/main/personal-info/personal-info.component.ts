@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SHARED_ZORRO_MODULES } from 'src/app/common/modules/shared-zorro.module';
-import { UsersInfoResponse } from '../../../models/users-info-response';
-import { UsersService } from 'src/app/services/users.service';
+import { Router, RouterModule } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { SHARED_ZORRO_MODULES } from 'src/app/common/modules/shared-zorro.module';
 import { LoginService } from 'src/app/services/login.service';
+import { UsersService } from 'src/app/services/users.service';
+import { UsersInfoResponse } from '../../../models/users-info-response';
 
 @Component({
   selector: 'app-personal-info',
@@ -24,27 +24,8 @@ export class PersonalInfoComponent implements OnInit {
   userData!: UsersInfoResponse;
   userDataLoaded = false;
 
-  test() {
-    let token = localStorage.getItem('token');
-    console.log(token);
-    if (token) {
-      this.usersService.validated(token).subscribe({
-        next: (result) => {
-          console.log(result);
-          if (result.returnCode == '00000') {
-            this.loginService.loggedIn();
-            if (result.data.level == 2) {
-              this.loginService.loggedAdmin();
-            }
-          }
-        },
-        error: (result) => {
-          console.log(result);
-          // this.loginService.loggedOut();
-        },
-        complete: () => {},
-      });
-    }
+  toOrderHistory() {
+    this.router.navigate(['/order-history']);
   }
 
   loggedOut() {
