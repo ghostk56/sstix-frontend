@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -16,11 +16,21 @@ import { EventsService } from 'src/app/services/events.service';
     ReactiveFormsModule,
     SHARED_ZORRO_MODULES,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './admin-events.component.html',
   styleUrls: ['./admin-events.component.css'],
 })
 export class AdminEventsComponent implements OnInit {
   listOfData: EventsResponse[] = [];
+
+  expandSet = new Set<number>();
+  onExpandChange(id: number, checked: boolean): void {
+    if (checked) {
+      this.expandSet.add(id);
+    } else {
+      this.expandSet.delete(id);
+    }
+  }
 
   constructor(
     private router: Router,

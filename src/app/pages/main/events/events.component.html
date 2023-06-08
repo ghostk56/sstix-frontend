@@ -24,7 +24,10 @@
         nzDescription="{{ data.eventDate }}"
       ></nz-card-meta>
       <br />
-      <p>{{ data.status === 1 ? "販售中" : "尚未開賣" }}</p>
+      <p *ngIf="data.qty > 0">
+        {{ data.status === 1 ? "販售中" : "尚未開賣" }}
+      </p>
+      <p *ngIf="data.qty == 0">已售完</p>
     </nz-card>
     <ng-template #coverTemplate>
       <div class="image-container">

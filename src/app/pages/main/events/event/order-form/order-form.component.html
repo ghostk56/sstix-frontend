@@ -1,11 +1,24 @@
-<div nz-row class="center-div">
-    <div nz-col nzSpan="10">
-        <h1>訂購</h1>
-        <h3>2023 Damien Rice 演唱會-台北場</h3>
-        <h3>2023/05/31(周三) 19:30(+0800)</h3>
-        <h3>票價: ${{ price }}</h3>
-        <label for="">張數:</label><nz-input-number [(ngModel)]="demoValue" [nzMin]="1" [nzMax]="qty" [nzStep]="1"></nz-input-number>
-        <h2>總金額: ${{ getTotal() }}</h2>
-        <button nz-button nzSize="large" nzType="primary" (click)="toOrder()">確認送出</button>
-    </div>
+<div nz-row class="center-div" *ngIf="dataLoaded">
+  <div nz-col nzSpan="10">
+    <h1>訂票</h1>
+    <h3>{{ eventData.name }}</h3>
+    <h3>{{ eventData.eventDate }}</h3>
+    <h3>票價: ${{ eventData.price }}</h3>
+    <ng-container *ngIf="eventData.qty > 0">
+      <label>張數:</label
+      ><nz-input-number
+        [(ngModel)]="demoValue"
+        [nzMin]="1"
+        [nzMax]="eventData.qty"
+        [nzStep]="1"
+      ></nz-input-number>
+      <h2>總金額: ${{ demoValue * eventData.price }}</h2>
+      <button nz-button nzSize="large" nzType="primary" (click)="toOrder()">
+        確認送出
+      </button>
+    </ng-container>
+    <ng-container *ngIf="eventData.qty == 0">
+      <h2>已售完</h2>
+    </ng-container>
+  </div>
 </div>
