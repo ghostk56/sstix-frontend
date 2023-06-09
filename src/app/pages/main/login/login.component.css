@@ -17,4 +17,5 @@
   .center-div {
     display: flex;
     justify-content: center;
+    width: 1000px;
 }

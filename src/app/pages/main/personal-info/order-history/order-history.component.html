@@ -39,8 +39,15 @@
               {{ data.orderDate | date : "yyyy-MM-dd HH:mm" }}
             </td>
             <td>
-              <a *ngIf="data.status == 1" (click)="cancelOrder(data.id)"
-                >取消</a
+              <a
+                *ngIf="data.status == 1"
+                nz-popconfirm
+                nzPopconfirmTitle="確定取消嗎?"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="cancelOrder(data.id)"
+                nzPopconfirmPlacement="top"
+              >
+                取消</a
               >
               <span *ngIf="data.status == 0">已取消</span>
             </td>

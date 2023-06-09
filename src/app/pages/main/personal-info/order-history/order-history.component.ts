@@ -7,6 +7,7 @@ import { SHARED_ZORRO_MODULES } from 'src/app/common/modules/shared-zorro.module
 import { OrderUpdateRequest } from 'src/app/models/order-update-request';
 import { OrdersResponse } from 'src/app/models/orders-response';
 import { OrdersService } from 'src/app/services/orders.service';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 @Component({
   selector: 'app-order-history',
@@ -16,6 +17,7 @@ import { OrdersService } from 'src/app/services/orders.service';
     RouterModule,
     ReactiveFormsModule,
     SHARED_ZORRO_MODULES,
+    NzPopconfirmModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './order-history.component.html',

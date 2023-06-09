@@ -1,8 +1,11 @@
 <div nz-row class="center-div" *ngIf="dataLoaded">
-  <div nz-col nzSpan="10">
+  <div nz-col nzSpan="16">
     <h1>訂票</h1>
-    <h3>{{ eventData.name }}</h3>
+    <h2>{{ eventData.name }}</h2>
     <h3>{{ eventData.eventDate }}</h3>
+    <div class="image-container">
+      <img src="http://localhost:8080/image/{{ eventData.image1 }}" />
+    </div>
     <h3>票價: ${{ eventData.price }}</h3>
     <ng-container *ngIf="eventData.qty > 0">
       <label>張數:</label
@@ -13,7 +16,7 @@
         [nzStep]="1"
       ></nz-input-number>
       <h2>總金額: ${{ demoValue * eventData.price }}</h2>
-      <button nz-button nzSize="large" nzType="primary" (click)="toOrder()">
+      <button nz-button nzSize="large" nzType="primary" (click)="showConfirm()">
         確認送出
       </button>
     </ng-container>

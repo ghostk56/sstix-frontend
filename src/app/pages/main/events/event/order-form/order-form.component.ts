@@ -98,4 +98,14 @@ export class OrderFormComponent {
       });
     }
   }
+
+  showConfirm() {
+    this.modalService.confirm({
+      nzTitle: '確定送出訂單?',
+      nzContent: '總金額: ' + this.demoValue * this.eventData.price,
+      nzOnOk: () => {
+        this.toOrder();
+      },
+    });
+  }
 }

@@ -4,7 +4,7 @@
     <nz-upload
       nzName="image"
       nzAction="http://localhost:8080/image"
-      nzFileType="image/jpeg"
+      [nzFileType]="'image/png,image/jpeg,image/gif'"
       (nzChange)="handleChange($event)"
     >
       <button nz-button>
