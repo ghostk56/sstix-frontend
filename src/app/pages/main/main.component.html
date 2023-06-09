@@ -20,6 +20,22 @@
       <li nz-menu-item *ngIf="loginService.getAdminStatus() | async">
         <a routerLink="/admin">管理頁面</a>
       </li>
+      <li
+        nz-menu-item
+        *ngIf="loginService.getLoggedStatus() | async"
+        nz-popconfirm
+        nzPopconfirmTitle="確定登出?"
+        nzPopconfirmPlacement="bottom"
+        (nzOnConfirm)="loggedOut()"
+      >
+        <span
+          nz-icon
+          nzType="logout"
+          nzTheme="outline"
+          style="font-size: 20px"
+        ></span>
+        登出
+      </li>
     </ul>
   </nz-header>
   <nz-content>
