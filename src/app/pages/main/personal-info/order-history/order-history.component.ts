@@ -3,11 +3,12 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { SHARED_ZORRO_MODULES } from 'src/app/common/modules/shared-zorro.module';
 import { OrderUpdateRequest } from 'src/app/models/order-update-request';
 import { OrdersResponse } from 'src/app/models/orders-response';
+import { LoginService } from 'src/app/services/login.service';
 import { OrdersService } from 'src/app/services/orders.service';
-import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 @Component({
   selector: 'app-order-history',
@@ -17,7 +18,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     RouterModule,
     ReactiveFormsModule,
     SHARED_ZORRO_MODULES,
-    NzPopconfirmModule
+    NzPopconfirmModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './order-history.component.html',
@@ -71,7 +72,8 @@ export class OrderHistoryComponent implements OnInit {
   constructor(
     private router: Router,
     private ordersService: OrdersService,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
@@ -92,12 +94,21 @@ export class OrderHistoryComponent implements OnInit {
             this.modalService.success({
               nzTitle: result.error.returnMsg,
               nzContent: '錯誤!',
-              nzOnOk: () => {},
+              nzOnOk: () => {
+                this.loggedOut();
+              },
             });
           }
         },
         complete: () => {},
       });
+    } else {
+      this.loggedOut();
     }
+  }
+
+  loggedOut() {
+    this.loginService.loggedOut();
+    this.router.navigate(['/login']);
   }
 }

@@ -6,6 +6,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { SHARED_ZORRO_MODULES } from 'src/app/common/modules/shared-zorro.module';
 import { EventsResponse } from 'src/app/models/events-response';
 import { EventsService } from 'src/app/services/events.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-event',
@@ -28,7 +29,8 @@ export class EventComponent {
     private router: Router,
     private route: ActivatedRoute,
     private eventsService: EventsService,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private loginService: LoginService
   ) {}
 
   ngOnInit() {
@@ -54,6 +56,17 @@ export class EventComponent {
   }
 
   goToOrder() {
-    this.router.navigate(['/events', this.eventId, 'order-form']); // 使用路由導航到 'order' 路徑
+    if (!this.loginService.logged$.value) {
+      window.scrollTo(0, 0);
+      this.modalService.success({
+        nzTitle: '未登入',
+        nzContent: '請先登入!',
+        nzOnOk: () => {
+          this.router.navigate(['/login']); // 使用路由導航到 'login' 路徑
+        },
+      });
+    } else {
+      this.router.navigate(['/events', this.eventId, 'order-form']); // 使用路由導航到 'order' 路徑
+    }
   }
 }

@@ -63,6 +63,8 @@ export class PersonalInfoComponent implements OnInit {
         },
         complete: () => {},
       });
+    } else {
+      this.loggedOut();
     }
   }
 }

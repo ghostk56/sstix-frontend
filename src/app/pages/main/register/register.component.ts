@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   ReactiveFormsModule,
@@ -6,13 +7,12 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { SHARED_ZORRO_MODULES } from '../../../common/modules/shared-zorro.module';
-import { UsersRegisterRequest } from 'src/app/models/users-register-request';
-import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { UsersRegisterRequest } from 'src/app/models/users-register-request';
 import { LoginService } from 'src/app/services/login.service';
+import { UsersService } from 'src/app/services/users.service';
+import { SHARED_ZORRO_MODULES } from '../../../common/modules/shared-zorro.module';
 
 @Component({
   standalone: true,
@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       username: [null, [Validators.required]],
-      email: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
       phone: [null, [Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],

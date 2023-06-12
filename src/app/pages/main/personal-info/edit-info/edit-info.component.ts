@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   ReactiveFormsModule,
@@ -6,12 +7,12 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { SHARED_ZORRO_MODULES } from 'src/app/common/modules/shared-zorro.module';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { UsersService } from 'src/app/services/users.service';
+import { SHARED_ZORRO_MODULES } from 'src/app/common/modules/shared-zorro.module';
 import { UsersUpdateRequest } from 'src/app/models/users-update-request';
+import { LoginService } from 'src/app/services/login.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-edit-info',
@@ -54,6 +55,8 @@ export class EditInfoComponent implements OnInit {
           },
           complete: () => {},
         });
+      } else {
+        this.loggedOut();
       }
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
@@ -83,11 +86,17 @@ export class EditInfoComponent implements OnInit {
     return {};
   };
 
+  loggedOut() {
+    this.loginService.loggedOut();
+    this.router.navigate(['/login']);
+  }
+
   constructor(
     private fb: UntypedFormBuilder,
     private usersService: UsersService,
     private modalService: NzModalService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
