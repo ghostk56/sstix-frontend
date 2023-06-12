@@ -39,9 +39,9 @@ import { SHARED_ZORRO_MODULES } from '../../../common/modules/shared-zorro.modul
             <nz-form-label [nzLg]="6" [nzMd]="24" nzRequired nzFor="email"
               >Email</nz-form-label
             >
-            <nz-form-control [nzLg]="12" [nzMd]="24" [nzErrorTip]="errorTpl">
+            <nz-form-control [nzLg]="12" [nzMd]="24" [nzErrorTip]="errorEmail">
               <input nz-input formControlName="email" id="email" />
-              <ng-template #errorTpl let-control>
+              <ng-template #errorEmail let-control>
                 <ng-container *ngIf="control.hasError('required')"
                   >請輸入Email！</ng-container
                 >
