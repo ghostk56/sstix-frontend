@@ -6,8 +6,8 @@ import { LoginService } from './services/login.service';
   standalone: true,
   imports: [RouterModule],
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  template: `<router-outlet></router-outlet>`,
+  styles: [``],
 })
 export class AppComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router) {}

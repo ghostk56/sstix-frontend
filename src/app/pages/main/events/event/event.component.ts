@@ -17,8 +17,69 @@ import { LoginService } from 'src/app/services/login.service';
     ReactiveFormsModule,
     SHARED_ZORRO_MODULES,
   ],
-  templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css'],
+  template: `
+    <div nz-row class="center-div">
+      <div nz-col nzSpan="20" *ngIf="dataLoaded">
+        <h1>{{ eventData.name }}</h1>
+        <h3>{{ eventData.eventDate }}</h3>
+        <h3>{{ eventData.location }}</h3>
+        <div class="image-container">
+          <img src="http://localhost:8080/image/{{ eventData.image1 }}" />
+        </div>
+        <h2>{{ eventData.organizer }}</h2>
+        <p>
+          {{ eventData.details }}
+        </p>
+        <h2>票價: {{ eventData.price }}</h2>
+        <ng-container *ngIf="eventData.qty > 0">
+          <div *ngIf="eventData.status === 1">
+            <button
+              nz-button
+              nzSize="large"
+              nzType="primary"
+              (click)="goToOrder()"
+            >
+              立即訂購
+            </button>
+          </div>
+          <div *ngIf="eventData.status === 2">
+            <button nz-button nzSize="large" nzType="primary" disabled>
+              尚未開賣
+            </button>
+          </div>
+        </ng-container>
+        <button
+          *ngIf="eventData.qty == 0"
+          nzSize="large"
+          nz-button
+          nzType="primary"
+          disabled
+        >
+          已售完
+        </button>
+      </div>
+    </div>
+  `,
+  styles: [
+    `
+      .center-div {
+        display: flex;
+        justify-content: center;
+        width: 900px;
+      }
+
+      .image-container {
+        width: 600px;
+        overflow: hidden; /* 隱藏溢出的內容 */
+      }
+
+      .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 填充剪裁適應容器 */
+      }
+    `,
+  ],
 })
 export class EventComponent {
   eventId = '';

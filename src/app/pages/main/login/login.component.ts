@@ -22,8 +22,78 @@ import { SHARED_ZORRO_MODULES } from '../../../common/modules/shared-zorro.modul
     ReactiveFormsModule,
     SHARED_ZORRO_MODULES,
   ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  template: `
+    <div nz-row class="center-div">
+      <div nz-col nzSpan="10">
+        <h1>登入</h1>
+        <form
+          nz-form
+          [formGroup]="validateForm"
+          class="login-form"
+          (ngSubmit)="submitForm()"
+        >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="請輸入使用者名稱!">
+              <nz-input-group nzPrefixIcon="user">
+                <input
+                  type="text"
+                  nz-input
+                  formControlName="userName"
+                  placeholder="使用者名稱"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="請輸入密碼!">
+              <nz-input-group nzPrefixIcon="lock">
+                <input
+                  type="password"
+                  nz-input
+                  formControlName="password"
+                  placeholder="密碼"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <button
+            nz-button
+            class="login-form-button login-form-margin"
+            [nzType]="'primary'"
+          >
+            登入
+          </button>
+          新用戶
+          <a routerLink="/register">註冊!</a>
+        </form>
+      </div>
+    </div>
+  `,
+  styles: [
+    `
+      .login-form {
+        max-width: 300px;
+      }
+
+      .login-form-margin {
+        margin-bottom: 16px;
+      }
+
+      .login-form-forgot {
+        float: right;
+      }
+
+      .login-form-button {
+        width: 100%;
+      }
+
+      .center-div {
+        display: flex;
+        justify-content: center;
+        width: 1000px;
+      }
+    `,
+  ],
 })
 export class LoginComponent {
   validateForm!: UntypedFormGroup;

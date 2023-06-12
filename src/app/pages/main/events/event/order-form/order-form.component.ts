@@ -19,8 +19,60 @@ import { OrdersService } from 'src/app/services/orders.service';
     SHARED_ZORRO_MODULES,
     FormsModule,
   ],
-  templateUrl: './order-form.component.html',
-  styleUrls: ['./order-form.component.css'],
+  template: `
+    <div nz-row class="center-div" *ngIf="dataLoaded">
+      <div nz-col nzSpan="16">
+        <h1>訂票</h1>
+        <h2>{{ eventData.name }}</h2>
+        <h3>{{ eventData.eventDate }}</h3>
+        <div class="image-container">
+          <img src="http://localhost:8080/image/{{ eventData.image1 }}" />
+        </div>
+        <h3>票價: {{ '$' + eventData.price }}</h3>
+        <ng-container *ngIf="eventData.qty > 0">
+          <label>張數:</label
+          ><nz-input-number
+            [(ngModel)]="demoValue"
+            [nzMin]="1"
+            [nzMax]="eventData.qty"
+            [nzStep]="1"
+          ></nz-input-number>
+          <h2>總金額: {{ '$' + demoValue * eventData.price }}</h2>
+          <button
+            nz-button
+            nzSize="large"
+            nzType="primary"
+            (click)="showConfirm()"
+          >
+            確認送出
+          </button>
+        </ng-container>
+        <ng-container *ngIf="eventData.qty == 0">
+          <h2>已售完</h2>
+        </ng-container>
+      </div>
+    </div>
+  `,
+  styles: [
+    `
+      .center-div {
+        display: flex;
+        justify-content: center;
+        width: 800px;
+      }
+
+      .image-container {
+        width: 500px;
+        overflow: hidden; /* 隱藏溢出的內容 */
+      }
+
+      .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 填充剪裁適應容器 */
+      }
+    `,
+  ],
 })
 export class OrderFormComponent {
   eventId = '';
